@@ -277,7 +277,7 @@ export default function GoogleDriveClone() {
                       )}
                     </div>
                     <div className="col-span-2 flex items-center text-sm text-gray-400">{item.modified}</div>
-                    <div className="col-span-2 flex items-center text-sm text-gray-400">{item.size || "—"}</div>
+                    <div className="col-span-2 flex items-center text-sm text-gray-400">{item.size ?? "—"}</div>
                     <div className="col-span-2 flex items-center justify-end">
                       <Button variant="ghost" size="icon" className="hover:bg-gray-600">
                         <MoreVertical className="h-4 w-4" />
