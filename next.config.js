@@ -11,7 +11,8 @@ const config = {
   },
   typescript: {
     ignoreBuildErrors: true,
-  }
+  },
+  outputFileTracingRoot: import.meta.dirname,
 };
 
 export default config;

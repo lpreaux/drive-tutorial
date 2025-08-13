@@ -20,103 +20,7 @@ import {
   Video,
   Music,
 } from "lucide-react"
-
-// Mock data structure
-const mockData = {
-  "/": {
-    name: "My Drive",
-    items: [
-      { id: "1", name: "Documents", type: "folder", size: null, modified: "2024-01-15" },
-      { id: "2", name: "Photos", type: "folder", size: null, modified: "2024-01-10" },
-      { id: "3", name: "Projects", type: "folder", size: null, modified: "2024-01-20" },
-      {
-        id: "4",
-        name: "Resume.pdf",
-        type: "file",
-        size: "2.4 MB",
-        modified: "2024-01-18",
-        url: "/pdf-document.png",
-      },
-      {
-        id: "5",
-        name: "Vacation.jpg",
-        type: "file",
-        size: "5.2 MB",
-        modified: "2024-01-12",
-        url: "/tropical-beach-family.png",
-      },
-      {
-        id: "6",
-        name: "Presentation.pptx",
-        type: "file",
-        size: "12.8 MB",
-        modified: "2024-01-16",
-        url: "/presentation-slides.png",
-      },
-    ],
-  },
-  "/Documents": {
-    name: "Documents",
-    items: [
-      { id: "7", name: "Work", type: "folder", size: null, modified: "2024-01-14" },
-      { id: "8", name: "Personal", type: "folder", size: null, modified: "2024-01-13" },
-      {
-        id: "9",
-        name: "Report.docx",
-        type: "file",
-        size: "1.2 MB",
-        modified: "2024-01-15",
-        url: "/word-document.png",
-      },
-      {
-        id: "10",
-        name: "Notes.txt",
-        type: "file",
-        size: "45 KB",
-        modified: "2024-01-14",
-        url: "/text-file.png",
-      },
-    ],
-  },
-  "/Photos": {
-    name: "Photos",
-    items: [
-      { id: "11", name: "Summer 2024", type: "folder", size: null, modified: "2024-01-08" },
-      { id: "12", name: "Family", type: "folder", size: null, modified: "2024-01-05" },
-      {
-        id: "13",
-        name: "sunset.jpg",
-        type: "file",
-        size: "3.8 MB",
-        modified: "2024-01-10",
-        url: "/vibrant-sunset-landscape.png",
-      },
-      {
-        id: "14",
-        name: "portrait.png",
-        type: "file",
-        size: "2.1 MB",
-        modified: "2024-01-09",
-        url: "/classic-portrait.png",
-      },
-    ],
-  },
-  "/Projects": {
-    name: "Projects",
-    items: [
-      { id: "15", name: "Website Redesign", type: "folder", size: null, modified: "2024-01-20" },
-      { id: "16", name: "Mobile App", type: "folder", size: null, modified: "2024-01-18" },
-      {
-        id: "17",
-        name: "proposal.pdf",
-        type: "file",
-        size: "890 KB",
-        modified: "2024-01-19",
-        url: "/business-proposal.png",
-      },
-    ],
-  },
-}
+import { mockData } from "~/lib/mock-data"
 
 const getFileIcon = (fileName: string) => {
   const extension = fileName.split(".").pop()?.toLowerCase()
@@ -145,32 +49,46 @@ const getFileIcon = (fileName: string) => {
 }
 
 export default function GoogleDriveClone() {
-  const [currentPath, setCurrentPath] = useState("/")
+  const [currentFolderId, setCurrentFolderId] = useState("root")
   const [viewMode, setViewMode] = useState<"grid" | "list">("list")
   const [searchQuery, setSearchQuery] = useState("")
 
-  const currentFolder = mockData[currentPath as keyof typeof mockData]
-
-  const filteredItems =
-    currentFolder?.items.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase())) || []
-
-  const breadcrumbs = currentPath === "/" ? ["My Drive"] : ["My Drive", ...currentPath.split("/").filter(Boolean)]
-
-  const handleFolderClick = (folderName: string) => {
-    const newPath = currentPath === "/" ? `/${folderName}` : `${currentPath}/${folderName}`
-    if (mockData[newPath as keyof typeof mockData]) {
-      setCurrentPath(newPath)
-    }
+  const getCurrentFolderItems = () => {
+    return mockData.filter((item) => item.parent === currentFolderId)
   }
 
-  const handleBreadcrumbClick = (index: number) => {
-    if (index === 0) {
-      setCurrentPath("/")
-    } else {
-      const pathParts = currentPath.split("/").filter(Boolean)
-      const newPath = "/" + pathParts.slice(0, index).join("/")
-      setCurrentPath(newPath)
+  const getFolderById = (id: string) => {
+    return mockData.find((item) => item.id === id && item.type === "folder")
+  }
+
+  const getBreadcrumbs = () => {
+    const breadcrumbs: { id: string; name: string }[] = []
+    let currentId = currentFolderId
+
+    while (currentId !== null) {
+      const folder = getFolderById(currentId)
+      if (folder) {
+        breadcrumbs.unshift({ id: folder.id, name: folder.name === "/" ? "My Drive" : folder.name })
+        currentId = folder.parent
+      } else {
+        break
+      }
     }
+
+    return breadcrumbs
+  }
+
+  const currentItems = getCurrentFolderItems()
+  const filteredItems = currentItems.filter((item) => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
+
+  const breadcrumbs = getBreadcrumbs()
+
+  const handleFolderClick = (folderId: string) => {
+    setCurrentFolderId(folderId)
+  }
+
+  const handleBreadcrumbClick = (folderId: string) => {
+    setCurrentFolderId(folderId)
   }
 
   const handleUpload = () => {
@@ -215,7 +133,11 @@ export default function GoogleDriveClone() {
         {/* Sidebar */}
         <aside className="w-64 border-r border-gray-700 bg-gray-800 p-4">
           <nav className="space-y-2">
-            <Button variant="ghost" className="w-full justify-start gap-2 text-white hover:bg-gray-700">
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-2 text-white hover:bg-gray-700"
+              onClick={() => setCurrentFolderId("root")}
+            >
               <Home className="h-4 w-4" />
               My Drive
             </Button>
@@ -235,9 +157,9 @@ export default function GoogleDriveClone() {
           {/* Breadcrumbs */}
           <div className="mb-6 flex items-center gap-1 text-sm text-gray-400">
             {breadcrumbs.map((crumb, index) => (
-              <div key={index} className="flex items-center gap-1">
-                <button onClick={() => handleBreadcrumbClick(index)} className="hover:text-blue-400 hover:underline">
-                  {crumb}
+              <div key={crumb.id} className="flex items-center gap-1">
+                <button onClick={() => handleBreadcrumbClick(crumb.id)} className="hover:text-blue-400 hover:underline">
+                  {crumb.name}
                 </button>
                 {index < breadcrumbs.length - 1 && <ChevronRight className="h-4 w-4" />}
               </div>
@@ -260,14 +182,14 @@ export default function GoogleDriveClone() {
                       {item.type === "folder" ? <Folder className="h-5 w-5 text-blue-400" /> : getFileIcon(item.name)}
                       {item.type === "folder" ? (
                         <button
-                          onClick={() => handleFolderClick(item.name)}
+                          onClick={() => handleFolderClick(item.id)}
                           className="font-medium text-white hover:text-blue-400 hover:underline"
                         >
                           {item.name}
                         </button>
                       ) : (
                         <a
-                          href={item.url}
+                          href={(item as any).url}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="font-medium text-white hover:text-blue-400 hover:underline"
@@ -277,7 +199,9 @@ export default function GoogleDriveClone() {
                       )}
                     </div>
                     <div className="col-span-2 flex items-center text-sm text-gray-400">{item.modified}</div>
-                    <div className="col-span-2 flex items-center text-sm text-gray-400">{item.size ?? "—"}</div>
+                    <div className="col-span-2 flex items-center text-sm text-gray-400">
+                      {item.type === "file" ? (item as any).size : "—"}
+                    </div>
                     <div className="col-span-2 flex items-center justify-end">
                       <Button variant="ghost" size="icon" className="hover:bg-gray-600">
                         <MoreVertical className="h-4 w-4" />
@@ -299,14 +223,14 @@ export default function GoogleDriveClone() {
                     )}
                     {item.type === "folder" ? (
                       <button
-                        onClick={() => handleFolderClick(item.name)}
+                        onClick={() => handleFolderClick(item.id)}
                         className="text-sm font-medium text-center text-white hover:text-blue-400 hover:underline"
                       >
                         {item.name}
                       </button>
                     ) : (
                       <a
-                        href={item.url}
+                        href={(item as any).url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm font-medium text-center text-white hover:text-blue-400 hover:underline"
@@ -314,9 +238,9 @@ export default function GoogleDriveClone() {
                         {item.name}
                       </a>
                     )}
-                    {item.size && (
+                    {item.type === "file" && (item as any).size && (
                       <Badge variant="secondary" className="text-xs bg-gray-700 text-gray-300">
-                        {item.size}
+                        {(item as any).size}
                       </Badge>
                     )}
                   </div>
