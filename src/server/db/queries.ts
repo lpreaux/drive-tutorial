@@ -1,7 +1,7 @@
 import "server-only";
 
 import { db } from "~/server/db/index";
-import { files_table } from "~/server/db/schema";
+import {type DBFileInsertType, files_table} from "~/server/db/schema";
 import { eq } from "drizzle-orm";
 
 export const QUERIES = {
@@ -27,5 +27,14 @@ export const QUERIES = {
       currentId = parent[0].parent;
     }
     return parents;
+  },
+};
+
+export const MUTATIONS = {
+  createFile: function (input: {
+    file: DBFileInsertType,
+    userId: string,
+  }) {
+    return db.insert(files_table).values(input.file);
   },
 };

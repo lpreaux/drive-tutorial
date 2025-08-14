@@ -1,5 +1,4 @@
 import {
-  int,
   text,
   index,
   singlestoreTableCreator,
@@ -27,3 +26,6 @@ export const files_table = createTable(
     return [index("parent_index").on(t.parent)];
   },
 );
+
+export type DBFileInsertType = typeof files_table.$inferInsert;
+export type DBFileSelectType = typeof files_table.$inferSelect;

@@ -13,9 +13,17 @@ import {
   Video,
   Music,
 } from "lucide-react";
-import type { files_table } from "~/server/db/schema";
+import type { DBFileSelectType } from "~/server/db/schema";
 import Link from "next/link";
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs";
+import { UploadButton } from "~/utils/uploadthing";
+import { useRouter } from "next/navigation";
 
 const getFileIcon = (fileName: string) => {
   const extension = fileName.split(".").pop()?.toLowerCase();
@@ -44,18 +52,20 @@ const getFileIcon = (fileName: string) => {
 };
 
 export default function DriveContents(props: {
-  files: (typeof files_table.$inferInsert)[],
-  viewMode: "grid" | "list",
-  searchQuery: string,
-  parents: (typeof files.$inferInsert)[],
+  files: DBFileSelectType[];
+  viewMode: "grid" | "list";
+  searchQuery: string;
+  parents: DBFileSelectType[];
 }) {
+  const navigate = useRouter();
+
   const currentItems = props.files;
   const filteredItems = currentItems.filter((item) =>
     item.name.toLowerCase().includes(props.searchQuery.toLowerCase()),
   );
 
   return (
-    <>
+    <div className="bg-gray-900">
       <header className="flex items-center justify-end gap-4 p-6">
         <SignedOut>
           <SignInButton />
@@ -197,7 +207,11 @@ export default function DriveContents(props: {
             </p>
           </div>
         )}
+
+        <UploadButton endpoint="imageUploader" onClientUploadComplete={() => {
+          navigate.refresh();
+        }}/>
       </main>
-    </>
+    </div>
   );
 }
