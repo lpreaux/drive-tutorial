@@ -15,6 +15,7 @@ import {
   Music,
 } from "lucide-react";
 import type { files } from "~/server/db/schema";
+import Link from "next/link";
 
 const getFileIcon = (fileName: string) => {
   const extension = fileName.split(".").pop()?.toLowerCase();
@@ -47,44 +48,12 @@ export default function DriveContents(props: {
   viewMode: "grid" | "list";
   searchQuery: string;
 }) {
-  const [currentFolderId, setCurrentFolderId] = useState(1);
-
-  const getBreadcrumbs = () => {
-    const breadcrumbs: { id: number; name: string }[] = [];
-    let currentId = currentFolderId;
-
-    while (currentId !== 1) {
-      const folder = props.files.find(
-        (item) => item.id === currentId && item.type === "folder",
-      );
-      if (folder) {
-        breadcrumbs.unshift({
-          id: folder.id ?? 1,
-          name: folder.name === "/" ? "My Drive" : folder.name,
-        });
-        currentId = folder.parent ?? 1;
-      } else {
-        break;
-      }
-    }
-
-    return breadcrumbs;
-  };
+  const breadcrumbs: unknown[] = [];
 
   const currentItems = props.files;
   const filteredItems = currentItems.filter((item) =>
     item.name.toLowerCase().includes(props.searchQuery.toLowerCase()),
   );
-
-  const breadcrumbs = getBreadcrumbs();
-
-  const handleFolderClick = (folderId: number) => {
-    setCurrentFolderId(folderId);
-  };
-
-  const handleBreadcrumbClick = (folderId: number) => {
-    setCurrentFolderId(folderId);
-  };
 
   return (
     <main className="flex-1 p-6">
@@ -92,12 +61,12 @@ export default function DriveContents(props: {
       <div className="mb-6 flex items-center gap-1 text-sm text-gray-400">
         {breadcrumbs.map((crumb, index) => (
           <div key={crumb.id} className="flex items-center gap-1">
-            <button
-              onClick={() => handleBreadcrumbClick(crumb.id)}
+            <Link
+              href={`/f/${crumb.id}`}
               className="hover:text-blue-400 hover:underline"
             >
               {crumb.name}
-            </button>
+            </Link>
             {index < breadcrumbs.length - 1 && (
               <ChevronRight className="h-4 w-4" />
             )}
@@ -124,12 +93,12 @@ export default function DriveContents(props: {
                     getFileIcon(item.name)
                   )}
                   {item.type === "folder" ? (
-                    <button
-                      onClick={() => handleFolderClick(item.id)}
+                    <Link
+                      href={`/f/${item.id}`}
                       className="font-medium text-white hover:text-blue-400 hover:underline"
                     >
                       {item.name}
-                    </button>
+                    </Link>
                   ) : (
                     <a
                       href={(item as any).url}

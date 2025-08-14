@@ -3,9 +3,11 @@
 ## TODO
 
 - [x] Set up fatabase and data model
-- [ ] Move folder open state to URL
+- [x] Move folder open state to URL
+- [ ] Add layout
 - [ ] Add auth
 - [ ] Add file uploading
+- [ ] Add analytics
 
 ## Note from 14-08-2025
 
@@ -15,3 +17,7 @@ Just finished up connecting database, next steps:
 - [x] Manually insert examples
 - [x] Render them in the UI
 - [x] Push and make it all works
+
+- [x] Change folders to Link components, remove all client state
+- [ ] Clean up the database and data fetching patterns
+- [ ] Real homepage
