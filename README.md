@@ -26,7 +26,7 @@ Just finished up connecting database, next steps:
 - [x] Add "ownership" to the files and folders
 - [x] Upload files to the right folder
 - [ ] Delete files button
-- [ ] Allow files that aren't images to be uploaded
+- [x] Allow files that aren't images to be uploaded
 - [x] Cleanup mock data
 - [ ] Find a better solution for root folder
 - [ ] Real homepage
