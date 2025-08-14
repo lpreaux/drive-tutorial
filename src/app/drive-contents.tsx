@@ -52,10 +52,11 @@ const getFileIcon = (fileName: string) => {
 };
 
 export default function DriveContents(props: {
+  currentFolderId: number;
   files: DBFileSelectType[];
+  parents: DBFileSelectType[];
   viewMode: "grid" | "list";
   searchQuery: string;
-  parents: DBFileSelectType[];
 }) {
   const navigate = useRouter();
 
@@ -208,9 +209,13 @@ export default function DriveContents(props: {
           </div>
         )}
 
-        <UploadButton endpoint="imageUploader" onClientUploadComplete={() => {
-          navigate.refresh();
-        }}/>
+        <UploadButton
+          endpoint="imageUploader"
+          onClientUploadComplete={() => {
+            navigate.refresh();
+          }}
+          input={{folderId: props.currentFolderId}}
+        />
       </main>
     </div>
   );

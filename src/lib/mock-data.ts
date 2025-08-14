@@ -1,7 +1,7 @@
 export type ActualFile = {
-  id: string;
+  id: number;
   name: string;
-  parent: string;
+  parentId: number;
   type: "file";
   size: string;
   modified?: string;
@@ -9,9 +9,9 @@ export type ActualFile = {
 };
 
 export type Folder = {
-  id: string;
+  id: number;
   name: string;
-  parent: string | null;
+  parentId: number | null;
   type: "folder";
   modified?: string;
 };
@@ -19,139 +19,139 @@ export type Folder = {
 export type File = ActualFile | Folder;
 
 export const mockData: File[] = [
-  { id: "root", type: "folder", name: "/", parent: null },
+  { id: 1, type: "folder", name: "/", parentId: null },
   {
-    id: "1",
+    id: 2,
     name: "Documents",
     type: "folder",
-    parent: "root",
+    parentId: 1,
     modified: "2024-01-15",
   },
   {
-    id: "2",
+    id: 3,
     name: "Photos",
     type: "folder",
-    parent: "root",
+    parentId: 1,
     modified: "2024-01-10",
   },
   {
-    id: "3",
+    id: 4,
     name: "Projects",
     type: "folder",
-    parent: "root",
+    parentId: 1,
     modified: "2024-01-20",
   },
   {
-    id: "4",
+    id: 5,
     name: "Resume.pdf",
     type: "file",
     size: "2.4 MB",
     modified: "2024-01-18",
-    parent: "root",
+    parentId: 1,
     url: "/pdf-document.png",
   },
   {
-    id: "5",
+    id: 6,
     name: "Vacation.jpg",
     type: "file",
     size: "5.2 MB",
-    parent: "root",
+    parentId: 1,
     modified: "2024-01-12",
     url: "/tropical-beach-family.png",
   },
   {
-    id: "6",
+    id: 7,
     name: "Presentation.pptx",
     type: "file",
     size: "12.8 MB",
-    parent: "root",
+    parentId: 1,
     modified: "2024-01-16",
     url: "/presentation-slides.png",
   },
   {
-    id: "7",
+    id: 8,
     name: "Work",
     type: "folder",
-    parent: "1",
+    parentId: 2,
     modified: "2024-01-14",
   },
   {
-    id: "8",
+    id: 9,
     name: "Personal",
     type: "folder",
-    parent: "1",
+    parentId: 2,
     modified: "2024-01-13",
   },
   {
-    id: "9",
+    id: 10,
     name: "Report.docx",
     type: "file",
     size: "1.2 MB",
-    parent: "1",
+    parentId: 2,
     modified: "2024-01-15",
     url: "/word-document.png",
   },
   {
-    id: "10",
+    id: 11,
     name: "Notes.txt",
     type: "file",
     size: "45 KB",
-    parent: "1",
+    parentId: 2,
     modified: "2024-01-14",
     url: "/text-file.png",
   },
   {
-    id: "11",
+    id: 12,
     name: "Summer 2024",
     type: "folder",
-    parent: "2",
+    parentId: 3,
     modified: "2024-01-08",
   },
   {
-    id: "12",
+    id: 13,
     name: "Family",
     type: "folder",
-    parent: "2",
+    parentId: 3,
     modified: "2024-01-05",
   },
   {
-    id: "13",
+    id: 14,
     name: "sunset.jpg",
     type: "file",
     size: "3.8 MB",
-    parent: "2",
+    parentId: 3,
     modified: "2024-01-10",
     url: "/vibrant-sunset-landscape.png",
   },
   {
-    id: "14",
+    id: 15,
     name: "portrait.png",
     type: "file",
     size: "2.1 MB",
-    parent: "2",
+    parentId: 3,
     modified: "2024-01-09",
     url: "/classic-portrait.png",
   },
   {
-    id: "15",
+    id: 16,
     name: "Website Redesign",
     type: "folder",
-    parent: "3",
+    parentId: 4,
     modified: "2024-01-20",
   },
   {
-    id: "16",
+    id: 17,
     name: "Mobile App",
     type: "folder",
-    parent: "3",
+    parentId: 4,
     modified: "2024-01-18",
   },
   {
-    id: "17",
+    id: 18,
     name: "proposal.pdf",
     type: "file",
     size: "890 KB",
-    parent: "3",
+    parentId: 4,
     modified: "2024-01-19",
     url: "/business-proposal.png",
   },

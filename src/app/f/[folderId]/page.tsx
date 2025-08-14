@@ -24,6 +24,7 @@ export default async function FolderPage(props: {
       parents={parents}
       viewMode={props.viewMode ?? "list"}
       searchQuery={props.searchQuery ?? ""}
+      currentFolderId={parsedFolderId}
     ></DriveContents>
   );
 }

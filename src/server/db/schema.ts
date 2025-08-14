@@ -3,27 +3,33 @@ import {
   index,
   singlestoreTableCreator,
   bigint,
+  timestamp,
 } from "drizzle-orm/singlestore-core";
 
 export const createTable = singlestoreTableCreator(
-  (name) => `DRIVE-TUTORIAL_${name}`,
+  (name) => `DRIVE_TUTORIAL_${name}`,
 );
 
 export const files_table = createTable(
-  "files-table",
+  "file_table",
   {
     id: bigint("id", { mode: "number", unsigned: true })
       .primaryKey()
       .autoincrement(),
+    ownerId: text("owner_id").notNull(),
     name: text("name").notNull(),
     type: text("type").notNull(),
-    parent: bigint("parent", { mode: "number", unsigned: true }),
+    parentId: bigint("parent_id", { mode: "number", unsigned: true }),
     size: text("size"),
     url: text("url"),
-    modified_at: text("modified_at"),
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    modifiedAt: timestamp("modified_at"),
   },
   (t) => {
-    return [index("parent_index").on(t.parent)];
+    return [
+      index("owner_index").on(t.ownerId),
+      index("parent_index").on(t.parentId),
+    ];
   },
 );
 

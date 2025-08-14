@@ -23,9 +23,10 @@ Just finished up connecting database, next steps:
 
 ## 15-08-2025
 
-- [ ] Real homepage
-- [ ] Upload files to the right folder
+- [x] Add "ownership" to the files and folders
+- [x] Upload files to the right folder
 - [ ] Delete files button
 - [ ] Allow files that aren't images to be uploaded
-- [ ] Cleanup mock data
+- [x] Cleanup mock data
 - [ ] Find a better solution for root folder
+- [ ] Real homepage
