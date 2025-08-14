@@ -10,7 +10,7 @@ export const createTable = singlestoreTableCreator(
   (name) => `DRIVE-TUTORIAL_${name}`,
 );
 
-export const files = createTable(
+export const files_table = createTable(
   "files-table",
   {
     id: bigint("id", { mode: "number", unsigned: true })

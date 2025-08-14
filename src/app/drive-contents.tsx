@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Badge } from "~/components/ui/badge";
@@ -14,7 +13,7 @@ import {
   Video,
   Music,
 } from "lucide-react";
-import type { files } from "~/server/db/schema";
+import type { files_table } from "~/server/db/schema";
 import Link from "next/link";
 
 const getFileIcon = (fileName: string) => {
@@ -44,7 +43,7 @@ const getFileIcon = (fileName: string) => {
 };
 
 export default function DriveContents(props: {
-  files: (typeof files.$inferInsert)[],
+  files: (typeof files_table.$inferInsert)[],
   viewMode: "grid" | "list",
   searchQuery: string,
   parents: (typeof files.$inferInsert)[],
