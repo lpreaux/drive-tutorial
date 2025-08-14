@@ -16,6 +16,7 @@ export const env = createEnv({
     SINGLESTORE_USER: z.string(),
     SINGLESTORE_PASSWORD: z.string(),
     SINGLESTORE_DATABASE: z.string(),
+
   },
 
   /**
@@ -25,6 +26,8 @@ export const env = createEnv({
    */
   client: {
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_POSTHOG_KEY: z.string(),
+    NEXT_PUBLIC_POSTHOG_HOST: z.string(),
   },
 
   /**
@@ -39,6 +42,8 @@ export const env = createEnv({
     SINGLESTORE_USER: process.env.SINGLESTORE_USER,
     SINGLESTORE_PASSWORD: process.env.SINGLESTORE_PASSWORD,
     SINGLESTORE_DATABASE: process.env.SINGLESTORE_DATABASE,
+    NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
+    NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

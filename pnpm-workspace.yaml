@@ -1,2 +1,3 @@
 ignoredBuiltDependencies:
+  - core-js
   - msgpackr-extract
