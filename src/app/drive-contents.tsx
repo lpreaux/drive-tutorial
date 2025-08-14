@@ -44,12 +44,11 @@ const getFileIcon = (fileName: string) => {
 };
 
 export default function DriveContents(props: {
-  files: (typeof files.$inferInsert)[];
-  viewMode: "grid" | "list";
-  searchQuery: string;
+  files: (typeof files.$inferInsert)[],
+  viewMode: "grid" | "list",
+  searchQuery: string,
+  parents: (typeof files.$inferInsert)[],
 }) {
-  const breadcrumbs: unknown[] = [];
-
   const currentItems = props.files;
   const filteredItems = currentItems.filter((item) =>
     item.name.toLowerCase().includes(props.searchQuery.toLowerCase()),
@@ -59,7 +58,7 @@ export default function DriveContents(props: {
     <main className="flex-1 p-6">
       {/* Breadcrumbs */}
       <div className="mb-6 flex items-center gap-1 text-sm text-gray-400">
-        {breadcrumbs.map((crumb, index) => (
+        {props.parents.map((crumb, index) => (
           <div key={crumb.id} className="flex items-center gap-1">
             <Link
               href={`/f/${crumb.id}`}
@@ -67,7 +66,7 @@ export default function DriveContents(props: {
             >
               {crumb.name}
             </Link>
-            {index < breadcrumbs.length - 1 && (
+            {index < props.parents.length - 1 && (
               <ChevronRight className="h-4 w-4" />
             )}
           </div>
