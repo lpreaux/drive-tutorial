@@ -19,5 +19,5 @@ Just finished up connecting database, next steps:
 - [x] Push and make it all works
 
 - [x] Change folders to Link components, remove all client state
-- [ ] Clean up the database and data fetching patterns
+- [x] Clean up the database and data fetching patterns
 - [ ] Real homepage
