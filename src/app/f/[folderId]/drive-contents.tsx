@@ -125,7 +125,7 @@ export default function DriveContents(props: {
                       </Link>
                     ) : (
                       <a
-                        href={(item as any).url}
+                        href={item.url!}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-medium text-white hover:text-blue-400 hover:underline"
@@ -135,10 +135,10 @@ export default function DriveContents(props: {
                     )}
                   </div>
                   <div className="col-span-2 flex items-center text-sm text-gray-400">
-                    {item.modified}
+                    {item.modifiedAt?.toLocaleString() ?? "—"}
                   </div>
                   <div className="col-span-2 flex items-center text-sm text-gray-400">
-                    {item.type === "file" ? (item as any).size : "—"}
+                    {item.type === "file" ? item.size! : "—"}
                   </div>
                   <div className="col-span-2 flex items-center justify-end">
                     <Button
@@ -169,15 +169,15 @@ export default function DriveContents(props: {
                     </div>
                   )}
                   {item.type === "folder" ? (
-                    <button
-                      onClick={() => handleFolderClick(item.id)}
+                    <Link
+                      href={`/f/${item.id}`}
                       className="text-center text-sm font-medium text-white hover:text-blue-400 hover:underline"
                     >
                       {item.name}
-                    </button>
+                    </Link>
                   ) : (
                     <a
-                      href={(item as any).url}
+                      href={item.url!}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-center text-sm font-medium text-white hover:text-blue-400 hover:underline"
@@ -185,12 +185,12 @@ export default function DriveContents(props: {
                       {item.name}
                     </a>
                   )}
-                  {item.type === "file" && (item as any).size && (
+                  {item.type === "file" && item.size && (
                     <Badge
                       variant="secondary"
                       className="bg-gray-700 text-xs text-gray-300"
                     >
-                      {(item as any).size}
+                      {item.size}
                     </Badge>
                   )}
                 </div>
@@ -214,7 +214,7 @@ export default function DriveContents(props: {
           onClientUploadComplete={() => {
             navigate.refresh();
           }}
-          input={{folderId: props.currentFolderId}}
+          input={{ folderId: props.currentFolderId }}
         />
       </main>
     </div>
