@@ -5,7 +5,7 @@
 - [x] Set up fatabase and data model
 - [x] Move folder open state to URL
 - [ ] Add layout
-- [ ] Add auth
+- [x] Add auth
 - [ ] Add file uploading
 - [ ] Add analytics
 
