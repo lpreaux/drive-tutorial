@@ -12,6 +12,7 @@ import {
   ImageIcon,
   Video,
   Music,
+  Trash2Icon,
 } from "lucide-react";
 import type { DBFileSelectType } from "~/server/db/schema";
 import Link from "next/link";
@@ -24,6 +25,8 @@ import {
 } from "@clerk/nextjs";
 import { UploadButton } from "~/utils/uploadthing";
 import { useRouter } from "next/navigation";
+import { deleteFile } from "~/server/actions";
+import { router } from "next/client";
 
 const getFileIcon = (fileName: string) => {
   const extension = fileName.split(".").pop()?.toLowerCase();
@@ -147,6 +150,16 @@ export default function DriveContents(props: {
                       className="hover:bg-gray-600"
                     >
                       <MoreVertical className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="ml-2 hover:bg-gray-600"
+                      onClick={async () => {
+                        await deleteFile(item.id);
+                      }}
+                    >
+                      <Trash2Icon className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>

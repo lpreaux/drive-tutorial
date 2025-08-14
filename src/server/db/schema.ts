@@ -22,6 +22,7 @@ export const files_table = createTable(
     parentId: bigint("parent_id", { mode: "number", unsigned: true }),
     size: text("size"),
     url: text("url"),
+    key: text("key"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     modifiedAt: timestamp("modified_at"),
   },
