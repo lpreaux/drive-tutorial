@@ -4,7 +4,7 @@ export type ActualFile = {
   parent: string;
   type: "file";
   size: string;
-  fied?: string;
+  modified?: string;
   url: string;
 };
 
