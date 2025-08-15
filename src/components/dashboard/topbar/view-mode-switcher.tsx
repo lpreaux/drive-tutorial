@@ -2,7 +2,11 @@
 
 import { Grid3X3, List } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "~/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "~/components/ui/tooltip";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 
@@ -12,11 +16,14 @@ export default function ViewModeSwitcher() {
 
   const currentViewMode = searchParams.get("viewMode") ?? "list";
 
-  const switchViewMode = useCallback((newMode: "list" | "grid") => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("viewMode", newMode);
-    router.push(`?${params.toString()}`);
-  }, [router, searchParams]);
+  const switchViewMode = useCallback(
+    (newMode: "list" | "grid") => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("viewMode", newMode);
+      router.push(`?${params.toString()}`);
+    },
+    [router, searchParams],
+  );
 
   return (
     <div className="flex items-center gap-1 rounded-md border p-1">

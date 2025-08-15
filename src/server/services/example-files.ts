@@ -41,7 +41,7 @@ Happy organizing! 🚀`,
 // Cette fonction prépare les fichiers AVANT la transaction
 export async function createExampleFiles(
   userId: string,
-  folderIds: Record<string, number>
+  folderIds: Record<string, number>,
 ): Promise<DBFileInsertType[]> {
   const filesToCreate: DBFileInsertType[] = [];
 

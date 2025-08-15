@@ -5,10 +5,11 @@ import {
   AudioWaveform,
   BookOpen,
   Bot,
-  Command, FilesIcon,
+  Command,
+  FilesIcon,
   GalleryVerticalEnd,
   Settings2,
-  SquareTerminal
+  SquareTerminal,
 } from "lucide-react";
 
 import { NavMain } from "./nav-main";
@@ -19,7 +20,7 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarRail
+  SidebarRail,
 } from "~/components/ui/sidebar";
 import { useUser } from "@clerk/nextjs";
 
@@ -29,25 +30,25 @@ const data = {
     {
       name: "Acme Inc",
       logo: GalleryVerticalEnd,
-      plan: "Enterprise"
+      plan: "Enterprise",
     },
     {
       name: "Acme Corp.",
       logo: AudioWaveform,
-      plan: "Startup"
+      plan: "Startup",
     },
     {
       name: "Evil Corp.",
       logo: Command,
-      plan: "Free"
-    }
+      plan: "Free",
+    },
   ],
   navMain: [
     {
       title: "All Files",
       url: "/dashboard",
       icon: FilesIcon,
-      isActive: true
+      isActive: true,
     },
     {
       title: "Playground",
@@ -57,17 +58,17 @@ const data = {
       items: [
         {
           title: "History",
-          url: "#"
+          url: "#",
         },
         {
           title: "Starred",
-          url: "#"
+          url: "#",
         },
         {
           title: "Settings",
-          url: "#"
-        }
-      ]
+          url: "#",
+        },
+      ],
     },
     {
       title: "Models",
@@ -76,17 +77,17 @@ const data = {
       items: [
         {
           title: "Genesis",
-          url: "#"
+          url: "#",
         },
         {
           title: "Explorer",
-          url: "#"
+          url: "#",
         },
         {
           title: "Quantum",
-          url: "#"
-        }
-      ]
+          url: "#",
+        },
+      ],
     },
     {
       title: "Documentation",
@@ -95,21 +96,21 @@ const data = {
       items: [
         {
           title: "Introduction",
-          url: "#"
+          url: "#",
         },
         {
           title: "Get Started",
-          url: "#"
+          url: "#",
         },
         {
           title: "Tutorials",
-          url: "#"
+          url: "#",
         },
         {
           title: "Changelog",
-          url: "#"
-        }
-      ]
+          url: "#",
+        },
+      ],
     },
     {
       title: "Settings",
@@ -118,26 +119,28 @@ const data = {
       items: [
         {
           title: "General",
-          url: "#"
+          url: "#",
         },
         {
           title: "Team",
-          url: "#"
+          url: "#",
         },
         {
           title: "Billing",
-          url: "#"
+          url: "#",
         },
         {
           title: "Limits",
-          url: "#"
-        }
-      ]
-    }
-  ]
+          url: "#",
+        },
+      ],
+    },
+  ],
 };
 
-export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function DashboardSidebar({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
   const { user, isLoaded } = useUser();
 
   // Le layout s'occupe déjà de la vérification d'authentification
@@ -147,7 +150,7 @@ export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sideb
       <Sidebar collapsible="icon" {...props}>
         <SidebarHeader>
           <div className="flex items-center justify-center p-4">
-            <div className="animate-pulse bg-gray-200 h-8 w-32 rounded"></div>
+            <div className="h-8 w-32 animate-pulse rounded bg-gray-200"></div>
           </div>
         </SidebarHeader>
       </Sidebar>
@@ -163,11 +166,13 @@ export function DashboardSidebar({ ...props }: React.ComponentProps<typeof Sideb
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={{
-          name: user.fullName!,
-          email: user.primaryEmailAddress?.emailAddress ?? "No email",
-          avatar: user.imageUrl
-        }} />
+        <NavUser
+          user={{
+            name: user.fullName!,
+            email: user.primaryEmailAddress?.emailAddress ?? "No email",
+            avatar: user.imageUrl,
+          }}
+        />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

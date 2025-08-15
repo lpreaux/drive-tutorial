@@ -16,7 +16,6 @@ export const env = createEnv({
     SINGLESTORE_USER: z.string(),
     SINGLESTORE_PASSWORD: z.string(),
     SINGLESTORE_DATABASE: z.string(),
-
   },
 
   /**

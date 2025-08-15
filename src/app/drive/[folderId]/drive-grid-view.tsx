@@ -21,13 +21,16 @@ interface DriveGridViewProps {
   onDeleteFile?: (fileId: number) => Promise<void>;
 }
 
-export default function DriveGridView({ items, onDeleteFile }: DriveGridViewProps) {
+export default function DriveGridView({
+  items,
+  onDeleteFile,
+}: DriveGridViewProps) {
   const handleDeleteFile = (fileId: number) => {
     if (onDeleteFile) {
       void onDeleteFile(fileId);
     } else {
       // Fallback vers l'événement custom pour compatibilité
-      const event = new CustomEvent('deleteFile', { detail: fileId });
+      const event = new CustomEvent("deleteFile", { detail: fileId });
       window.dispatchEvent(event);
     }
   };
@@ -37,17 +40,17 @@ export default function DriveGridView({ items, onDeleteFile }: DriveGridViewProp
       {items.map((item) => (
         <Card
           key={item.id}
-          className="group relative h-32 border border-border bg-card text-card-foreground p-0 transition-all duration-200 hover:shadow-md hover:border-primary/20 hover:bg-accent/5"
+          className="group border-border bg-card text-card-foreground hover:border-primary/20 hover:bg-accent/5 relative h-32 border p-0 transition-all duration-200 hover:shadow-md"
         >
-          <CardContent className="p-4 h-full flex flex-col items-center justify-center gap-2">
+          <CardContent className="flex h-full flex-col items-center justify-center gap-2 p-4">
             {/* Menu d'actions (visible au hover) */}
-            <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="absolute top-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="h-8 w-8 p-0 bg-background/80 backdrop-blur-sm border border-border/50"
+                    className="bg-background/80 border-border/50 h-8 w-8 border p-0 backdrop-blur-sm"
                   >
                     <MoreHorizontal className="h-3 w-3" />
                   </Button>
@@ -60,13 +63,9 @@ export default function DriveGridView({ items, onDeleteFile }: DriveGridViewProp
                     Copy name
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    Rename
-                  </DropdownMenuItem>
+                  <DropdownMenuItem>Rename</DropdownMenuItem>
                   {item.type === "file" && (
-                    <DropdownMenuItem>
-                      Download
-                    </DropdownMenuItem>
+                    <DropdownMenuItem>Download</DropdownMenuItem>
                   )}
                   <DropdownMenuItem
                     className="text-destructive focus:text-destructive"
@@ -82,7 +81,7 @@ export default function DriveGridView({ items, onDeleteFile }: DriveGridViewProp
             {/* Icône */}
             <div className="flex-shrink-0">
               {item.type === "folder" ? (
-                <Folder className="h-10 w-10 text-primary" />
+                <Folder className="text-primary h-10 w-10" />
               ) : (
                 <div className="flex h-10 w-10 items-center justify-center">
                   {getFileIcon(item.name)}
@@ -91,11 +90,11 @@ export default function DriveGridView({ items, onDeleteFile }: DriveGridViewProp
             </div>
 
             {/* Nom du fichier/dossier */}
-            <div className="flex-1 w-full text-center">
+            <div className="w-full flex-1 text-center">
               {item.type === "folder" ? (
                 <Link
                   href={`/drive/${item.id}`}
-                  className="text-sm font-medium text-foreground hover:text-primary hover:underline line-clamp-2 leading-tight"
+                  className="text-foreground hover:text-primary line-clamp-2 text-sm leading-tight font-medium hover:underline"
                 >
                   {item.name}
                 </Link>
@@ -104,7 +103,7 @@ export default function DriveGridView({ items, onDeleteFile }: DriveGridViewProp
                   href={item.url!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-medium text-foreground hover:text-primary hover:underline line-clamp-2 leading-tight"
+                  className="text-foreground hover:text-primary line-clamp-2 text-sm leading-tight font-medium hover:underline"
                 >
                   {item.name}
                 </a>
@@ -115,7 +114,7 @@ export default function DriveGridView({ items, onDeleteFile }: DriveGridViewProp
             {item.type === "file" && item.size && (
               <Badge
                 variant="secondary"
-                className="text-xs px-2 py-0.5 bg-muted text-muted-foreground"
+                className="bg-muted text-muted-foreground px-2 py-0.5 text-xs"
               >
                 {item.size}
               </Badge>
@@ -124,7 +123,7 @@ export default function DriveGridView({ items, onDeleteFile }: DriveGridViewProp
             {/* Badge de type */}
             <Badge
               variant={item.type === "folder" ? "default" : "secondary"}
-              className="absolute bottom-2 left-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute bottom-2 left-2 text-xs opacity-0 transition-opacity group-hover:opacity-100"
             >
               {item.type}
             </Badge>

@@ -98,7 +98,7 @@ export default function DrivePageContent({
       {viewMode === "list" ? (
         <DriveListView items={filteredItems} onDeleteFile={handleDeleteFile} />
       ) : (
-        <DriveGridView items={filteredItems} onDeleteFile={handleDeleteFile}/>
+        <DriveGridView items={filteredItems} onDeleteFile={handleDeleteFile} />
       )}
 
       {/* État vide */}

@@ -13,17 +13,20 @@ const globalForDb = globalThis as unknown as {
 };
 
 export const client =
-  globalForDb.client ?? createPool({
-  host: env.SINGLESTORE_HOST,
-  port: parseInt(env.SINGLESTORE_PORT),
-  user: env.SINGLESTORE_USER,
-  password: env.SINGLESTORE_PASSWORD,
-  database: env.SINGLESTORE_DATABASE,
-  ssl: {},
-  maxIdle: 0,
+  globalForDb.client ??
+  createPool({
+    host: env.SINGLESTORE_HOST,
+    port: parseInt(env.SINGLESTORE_PORT),
+    user: env.SINGLESTORE_USER,
+    password: env.SINGLESTORE_PASSWORD,
+    database: env.SINGLESTORE_DATABASE,
+    ssl: {},
+    maxIdle: 0,
   });
 if (env.NODE_ENV !== "production") globalForDb.client = client;
 
 export const db = drizzle(client, { schema });
 
-export type Transaction = Parameters<Parameters<typeof db["transaction"]>[0]>[0];
+export type Transaction = Parameters<
+  Parameters<(typeof db)["transaction"]>[0]
+>[0];

@@ -41,7 +41,7 @@ export function NavUser({
 
   const handleSignout = () => {
     void signOut();
-  }
+  };
   return (
     <SidebarMenu>
       <SidebarMenuItem>

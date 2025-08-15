@@ -9,14 +9,13 @@ interface DriveListViewProps {
   onDeleteFile: (fileId: number) => Promise<void>;
 }
 
-export default function DriveListView({ items, onDeleteFile }: DriveListViewProps) {
+export default function DriveListView({
+  items,
+  onDeleteFile,
+}: DriveListViewProps) {
   return (
     <div className="space-y-4">
-      <DataTable
-        columns={columns}
-        data={items}
-        onDeleteFile={onDeleteFile}
-      />
+      <DataTable columns={columns} data={items} onDeleteFile={onDeleteFile} />
     </div>
   );
 }

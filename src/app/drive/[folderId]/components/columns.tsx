@@ -24,7 +24,7 @@ export const columns: ColumnDef<DBFileSelectType>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="h-auto p-0 hover:bg-muted"
+          className="hover:bg-muted h-auto p-0"
         >
           Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -43,7 +43,7 @@ export const columns: ColumnDef<DBFileSelectType>[] = [
           {file.type === "folder" ? (
             <Link
               href={`/drive/${file.id}`}
-              className="font-medium text-foreground hover:text-blue-600 hover:underline"
+              className="text-foreground font-medium hover:text-blue-600 hover:underline"
             >
               {file.name}
             </Link>
@@ -52,7 +52,7 @@ export const columns: ColumnDef<DBFileSelectType>[] = [
               href={file.url!}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium text-foreground hover:text-blue-600 hover:underline"
+              className="text-foreground font-medium hover:text-blue-600 hover:underline"
             >
               {file.name}
             </a>
@@ -68,7 +68,7 @@ export const columns: ColumnDef<DBFileSelectType>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="h-auto p-0 hover:bg-muted"
+          className="hover:bg-muted h-auto p-0"
         >
           Modified
           <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -79,7 +79,7 @@ export const columns: ColumnDef<DBFileSelectType>[] = [
       const date = row.getValue("modifiedAt");
       const isValidDate = date instanceof Date;
       return (
-        <div className="text-sm text-muted-foreground">
+        <div className="text-muted-foreground text-sm">
           {isValidDate ? date.toLocaleString() : "—"}
         </div>
       );
@@ -92,7 +92,7 @@ export const columns: ColumnDef<DBFileSelectType>[] = [
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          className="h-auto p-0 hover:bg-muted"
+          className="hover:bg-muted h-auto p-0"
         >
           Size
           <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -102,7 +102,7 @@ export const columns: ColumnDef<DBFileSelectType>[] = [
     cell: ({ row }) => {
       const file = row.original;
       if (file.type === "folder") {
-        return <div className="text-sm text-muted-foreground">—</div>;
+        return <div className="text-muted-foreground text-sm">—</div>;
       }
       return (
         <Badge variant="secondary" className="text-xs">
@@ -118,9 +118,7 @@ export const columns: ColumnDef<DBFileSelectType>[] = [
       const type = row.getValue("type");
       const typeString = typeof type === "string" ? type : "";
       return (
-        <Badge
-          variant={type === "folder" ? "default" : "secondary"}
-        >
+        <Badge variant={type === "folder" ? "default" : "secondary"}>
           {typeString}
         </Badge>
       );
@@ -148,17 +146,15 @@ export const columns: ColumnDef<DBFileSelectType>[] = [
               Copy name
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              Rename
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Download
-            </DropdownMenuItem>
+            <DropdownMenuItem>Rename</DropdownMenuItem>
+            <DropdownMenuItem>Download</DropdownMenuItem>
             <DropdownMenuItem
               className="text-destructive focus:text-destructive"
               onClick={() => {
                 // Cette action sera gérée par le parent
-                const event = new CustomEvent('deleteFile', { detail: file.id });
+                const event = new CustomEvent("deleteFile", {
+                  detail: file.id,
+                });
                 window.dispatchEvent(event);
               }}
             >

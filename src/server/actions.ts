@@ -31,7 +31,9 @@ export async function deleteFile(fileId: number) {
     console.log(utapiResult);
   }
 
-  const dbDeleteResult = await db.delete(files_table).where(eq(files_table.id, fileId));
+  const dbDeleteResult = await db
+    .delete(files_table)
+    .where(eq(files_table.id, fileId));
   console.log(dbDeleteResult);
 
   const c = await cookies();
