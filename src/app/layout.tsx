@@ -4,10 +4,12 @@ import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { PostHogProvider } from "~/app/_providers/posthog-provider";
+import { shadcn } from "@clerk/themes";
 
 export const metadata: Metadata = {
-  title: "Drive Tutorial",
-  description: "It's like Google but worst",
+  title: "LPX DRIVE - Secure Cloud Storage",
+  description:
+    "Experience seamless cloud storage designed for you. Secure your files with LPX DRIVE.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -20,7 +22,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider appearance={{ theme: shadcn }}>
       <html lang="en" className={`${geist.variable}`}>
         <body>
           <PostHogProvider>{children}</PostHogProvider>

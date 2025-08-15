@@ -111,8 +111,8 @@ export default function DriveContents(props: {
               <div className="col-span-2"></div>
             </div>
             {props.files.map((item) => (
-              <Card key={item.id} className="border-gray-700 bg-gray-800 p-0">
-                <div className="grid grid-cols-12 gap-4 px-4 py-3 hover:bg-gray-700">
+              <Card key={item.id} className="border-gray-700 bg-gray-800 p-0 hover:bg-gray-700">
+                <div className="grid grid-cols-12 gap-4 px-4 py-3 ">
                   <div className="col-span-6 flex items-center gap-3">
                     {item.type === "folder" ? (
                       <Folder className="h-5 w-5 text-blue-400" />
