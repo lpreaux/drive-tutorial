@@ -8,10 +8,11 @@
 - [x] Add file uploading
 - [x] Add analytics
 - [x] Keep file and folder in order
-- [ ] Add layout
-- [ ] Add homepage + onboarding
+- [x] Add homepage + onboarding
 - [x] Add delete
+- [ ] Create the dashboard layout
 - [ ] Find a better solution for root folder
+- [ ] Fix clerk integration (make sure to use app page when possible)
 
 
 ## Fun follow ups
