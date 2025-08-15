@@ -1,12 +1,15 @@
-import DriveContents from "~/app/drive/[folderId]/drive-contents";
 import { QUERIES } from "~/server/db/queries";
+import DrivePageContent from "./drive-page-content";
 
-export default async function FolderPage(props: {
+export default async function DrivePage(props: {
   params: Promise<{ folderId: string }>;
-  viewMode: "list" | "grid";
-  searchQuery: string;
+  searchParams?: Promise<{
+    viewMode?: "list" | "grid";
+    search?: string;
+  }>;
 }) {
   const params = await props.params;
+  const searchParams = await props.searchParams;
 
   const parsedFolderId = parseInt(params.folderId);
   if (isNaN(parsedFolderId)) {
@@ -18,13 +21,16 @@ export default async function FolderPage(props: {
     QUERIES.getAllParents(parsedFolderId),
   ]);
 
+  const viewMode = searchParams?.viewMode ?? "list";
+  const searchQuery = searchParams?.search ?? "";
+
   return (
-    <DriveContents
+    <DrivePageContent
       files={files}
       parents={parents}
-      viewMode={props.viewMode ?? "list"}
-      searchQuery={props.searchQuery ?? ""}
       currentFolderId={parsedFolderId}
-    ></DriveContents>
+      viewMode={viewMode}
+      searchQuery={searchQuery}
+    />
   );
 }

@@ -1,8 +1,6 @@
 import React from "react";
-import { QUERIES } from "~/server/db/queries";
-import ClientLayout from "./client-layout";
 
-export default async function FolderLayout(
+export default async function DriveLayout(
   props: Readonly<{
     children: React.ReactNode;
     params: Promise<{ folderId: string }>;
@@ -15,11 +13,5 @@ export default async function FolderLayout(
     return <div>Invalid folder ID!</div>;
   }
 
-  const parents = await QUERIES.getAllParents(parsedFolderId);
-
-  return (
-    <ClientLayout parents={parents} currentFolderId={parsedFolderId}>
-      {props.children}
-    </ClientLayout>
-  );
+  return <>{props.children}</>;
 }
