@@ -10,7 +10,8 @@
 - [x] Keep file and folder in order
 - [x] Add homepage + onboarding
 - [x] Add delete
-- [ ] Create the dashboard layout
+- [x] Create the dashboard layout
+- [ ] Restyle the dashboard views
 - [ ] Find a better solution for root folder
 - [ ] Fix clerk integration (make sure to use app page when possible)
 

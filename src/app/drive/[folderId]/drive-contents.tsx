@@ -70,37 +70,7 @@ export default function DriveContents(props: {
 
   return (
     <div className="bg-gray-900">
-      <header className="flex items-center justify-end gap-4 p-6">
-        <SignedOut>
-          <SignInButton />
-          <SignUpButton>
-            <button className="text-ceramic-white h-10 cursor-pointer rounded-full bg-[#6c47ff] px-4 text-sm font-medium sm:h-12 sm:px-5 sm:text-base">
-              Sign Up
-            </button>
-          </SignUpButton>
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </header>
       <main className="flex-1 p-6">
-        {/* Breadcrumbs */}
-        <div className="mb-6 flex items-center gap-1 text-sm text-gray-400">
-          {props.parents.map((crumb, index) => (
-            <div key={crumb.id} className="flex items-center gap-1">
-              <Link
-                href={`/f/${crumb.id}`}
-                className="hover:text-blue-400 hover:underline"
-              >
-                {crumb.name}
-              </Link>
-              {index < props.parents.length - 1 && (
-                <ChevronRight className="h-4 w-4" />
-              )}
-            </div>
-          ))}
-        </div>
-
         {/* File Grid/List */}
         {props.viewMode === "list" ? (
           <div className="space-y-1">
@@ -121,7 +91,7 @@ export default function DriveContents(props: {
                     )}
                     {item.type === "folder" ? (
                       <Link
-                        href={`/f/${item.id}`}
+                        href={`/drive/${item.id}`}
                         className="font-medium text-white hover:text-blue-400 hover:underline"
                       >
                         {item.name}
@@ -183,7 +153,7 @@ export default function DriveContents(props: {
                   )}
                   {item.type === "folder" ? (
                     <Link
-                      href={`/f/${item.id}`}
+                      href={`/drive/${item.id}`}
                       className="text-center text-sm font-medium text-white hover:text-blue-400 hover:underline"
                     >
                       {item.name}
