@@ -8,10 +8,7 @@ import { asc, desc, eq } from "drizzle-orm";
 type DbOrTransaction = typeof db | Transaction;
 
 export const QUERIES = {
-  getFolderContent: function (
-    folderId: number,
-    dbOrTx: DbOrTransaction = db
-  ) {
+  getFolderContent: function (folderId: number, dbOrTx: DbOrTransaction = db) {
     return dbOrTx
       .select()
       .from(files_table)
@@ -21,7 +18,7 @@ export const QUERIES = {
 
   getAllParents: async function (
     folderId: number,
-    dbOrTx: DbOrTransaction = db
+    dbOrTx: DbOrTransaction = db,
   ) {
     const parents = [];
     let currentId: number | null = folderId;
@@ -41,7 +38,7 @@ export const QUERIES = {
 
   getFolderById: async function (
     folderId: number,
-    dbOrTx: DbOrTransaction = db
+    dbOrTx: DbOrTransaction = db,
   ) {
     const folder = await dbOrTx
       .select()
@@ -53,7 +50,7 @@ export const QUERIES = {
   getFoldersByParentAndOwner: async function (
     parentId: number,
     ownerId: string,
-    dbOrTx: DbOrTransaction = db
+    dbOrTx: DbOrTransaction = db,
   ) {
     return dbOrTx
       .select()
@@ -65,22 +62,22 @@ export const QUERIES = {
 export const MUTATIONS = {
   createFile: function (
     file: DBFileInsertType | DBFileInsertType[],
-    dbOrTx: DbOrTransaction = db
+    dbOrTx: DbOrTransaction = db,
   ) {
+    if (Array.isArray(file)) {
+      return dbOrTx.insert(files_table).values(file).$returningId();
+    }
     return dbOrTx.insert(files_table).values(file).$returningId();
   },
 
-  deleteFile: function (
-    fileId: number,
-    dbOrTx: DbOrTransaction = db
-  ) {
+  deleteFile: function (fileId: number, dbOrTx: DbOrTransaction = db) {
     return dbOrTx.delete(files_table).where(eq(files_table.id, fileId));
   },
 
   updateFile: function (
     fileId: number,
     updates: Partial<DBFileInsertType>,
-    dbOrTx: DbOrTransaction = db
+    dbOrTx: DbOrTransaction = db,
   ) {
     return dbOrTx
       .update(files_table)

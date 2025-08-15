@@ -24,7 +24,7 @@ interface DriveGridViewProps {
 export default function DriveGridView({ items, onDeleteFile }: DriveGridViewProps) {
   const handleDeleteFile = (fileId: number) => {
     if (onDeleteFile) {
-      onDeleteFile(fileId);
+      void onDeleteFile(fileId);
     } else {
       // Fallback vers l'événement custom pour compatibilité
       const event = new CustomEvent('deleteFile', { detail: fileId });

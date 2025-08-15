@@ -77,9 +77,10 @@ export const columns: ColumnDef<DBFileSelectType>[] = [
     },
     cell: ({ row }) => {
       const date = row.getValue("modifiedAt");
+      const isValidDate = date instanceof Date;
       return (
         <div className="text-sm text-muted-foreground">
-          {date ? date.toLocaleString() : "—"}
+          {isValidDate ? date.toLocaleString() : "—"}
         </div>
       );
     },
@@ -115,11 +116,12 @@ export const columns: ColumnDef<DBFileSelectType>[] = [
     header: "Type",
     cell: ({ row }) => {
       const type = row.getValue("type");
+      const typeString = typeof type === "string" ? type : "";
       return (
         <Badge
           variant={type === "folder" ? "default" : "secondary"}
         >
-          {type}
+          {typeString}
         </Badge>
       );
     },

@@ -69,9 +69,9 @@ export function DataTable<TData, TValue>({
 
   // Event listener pour la suppression de fichiers
   React.useEffect(() => {
-    const handleDeleteFile = (event: CustomEvent) => {
+    const handleDeleteFile = (event: CustomEvent<number>) => {
       if (onDeleteFile) {
-        onDeleteFile(event.detail);
+        void onDeleteFile(event.detail);
       }
     };
 

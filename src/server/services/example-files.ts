@@ -60,7 +60,7 @@ export async function createExampleFiles(
           ownerId: userId,
           name: fileName,
           type: "file",
-          parentId: folderIds[fileData.folder] ?? folderIds["Documents"],
+          parentId: folderIds[fileData.folder] ?? folderIds.Documents,
           size: uploadedFile.size.toString(),
           url: uploadedFile.ufsUrl,
           key: uploadedFile.key,

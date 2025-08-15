@@ -72,6 +72,7 @@ export default function OnboardingPage() {
           setLoadingStep("")
         }
       } catch (err) {
+        console.error(err)
         setError("Failed to complete onboarding")
         setLoadingStep("")
       }
@@ -167,6 +168,7 @@ export default function OnboardingPage() {
                             <span>Documents</span>
                           </div>
                           <div className="flex items-center gap-2 text-muted-foreground">
+                            {/* eslint-disable-next-line jsx-a11y/alt-text */}
                             <Image className="h-4 w-4" />
                             <span>Pictures</span>
                           </div>
@@ -241,7 +243,7 @@ export default function OnboardingPage() {
                       Welcome to <span className="text-primary">LPX DRIVE</span>
                     </h1>
                     <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                      Let's set up your cloud storage space. Choose how you'd like to start your journey.
+                      {`Let's set up your cloud storage space. Choose how you'd like to start your journey.`}
                     </p>
                   </div>
 

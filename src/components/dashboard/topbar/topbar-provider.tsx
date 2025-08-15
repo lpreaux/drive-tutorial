@@ -11,8 +11,10 @@ const TopbarContext = createContext<{
   setRightContent: (content: ReactNode) => void;
 }>({
   leftContent: null,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setLeftContent: () => {},
   rightContent: null,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setRightContent: () => {},
 });
 

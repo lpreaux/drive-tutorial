@@ -22,8 +22,6 @@ import {
   SidebarRail
 } from "~/components/ui/sidebar";
 import { useUser } from "@clerk/nextjs";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 // This is sample data.
 const data = {

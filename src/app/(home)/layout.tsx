@@ -1,9 +1,5 @@
 import { ArrowRight, Cloud } from "lucide-react";
-import {
-  SignedIn,
-  SignedOut, SignInButton,
-  UserButton
-} from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
 
@@ -37,8 +33,11 @@ export default function RootLayout({
               </SignedOut>
 
               <SignedIn>
-                <Link href="/files">
-                  <Button variant="ghost" className="bg-primary hover:bg-primary/90 text-primary-foreground">
+                <Link href="/drive">
+                  <Button
+                    variant="ghost"
+                    className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                  >
                     Back to my Files
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>

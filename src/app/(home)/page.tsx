@@ -6,13 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import {
-  Zap,
-  Shield,
-  Users,
-  ArrowRight,
-  CheckCircle,
-} from "lucide-react";
+import { Zap, Shield, Users, ArrowRight, CheckCircle } from "lucide-react";
 
 export default async function HomePage() {
   return (
@@ -70,8 +64,8 @@ export default async function HomePage() {
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-muted-foreground text-center leading-relaxed">
-                  Drag, drop, done. No complex setup, no confusing menus. Just
-                  upload your files and they're instantly available everywhere.
+                  {`Drag, drop, done. No complex setup, no confusing menus. Just
+                  upload your files and they're instantly available everywhere.`}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -120,8 +114,8 @@ export default async function HomePage() {
               Built for Everyone
             </h3>
             <p className="text-muted-foreground mx-auto mb-8 max-w-3xl text-lg">
-              Whether you're a student, professional, or team - LPX DRIVE adapts
-              to how you work
+              {`Whether you're a student, professional, or team - LPX DRIVE adapts
+              to how you work`}
             </p>
           </div>
 
@@ -134,7 +128,7 @@ export default async function HomePage() {
                 </span>
               </div>
               <p className="text-muted-foreground text-sm">
-                Works exactly how you'd expect
+                {`Works exactly how you'd expect`}
               </p>
             </div>
 
