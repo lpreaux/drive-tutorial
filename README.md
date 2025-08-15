@@ -11,9 +11,15 @@
 - [x] Add homepage + onboarding
 - [x] Add delete
 - [x] Create the dashboard layout
-- [ ] Restyle the dashboard views
+- [*] Restyle the dashboard views
 - [ ] Find a better solution for root folder
+- [ ] Folder deletion
+- [ ] Folder creation
+- [ ] Access control
 - [ ] Fix clerk integration (make sure to use app page when possible)
+- [ ] Make a file viewer
+- [ ] Toast
+- [ ] Gray out a row while it's being deleted
 
 
 ## Fun follow ups

@@ -93,36 +93,31 @@ export default function DrivePageContent({
   }, [navigate]);
 
   return (
-    <div className="bg-background">
-      <main className="flex-1 p-6">
-        {/* Sélection du composant de vue */}
-        {viewMode === "list" ? (
-          <DriveListView
-            items={filteredItems}
-            onDeleteFile={handleDeleteFile}
-          />
-        ) : (
-          <DriveGridView items={filteredItems} />
-        )}
+    <div className="bg-background flex-1 p-6">
+      {/* Sélection du composant de vue */}
+      {viewMode === "list" ? (
+        <DriveListView items={filteredItems} onDeleteFile={handleDeleteFile} />
+      ) : (
+        <DriveGridView items={filteredItems} />
+      )}
 
-        {/* État vide */}
-        {filteredItems.length === 0 && (
-          <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
-            <Folder className="mb-4 h-16 w-16" />
-            <p className="text-lg font-medium">No items found</p>
-            <p className="text-sm">
-              Try adjusting your search or upload some files
-            </p>
-          </div>
-        )}
+      {/* État vide */}
+      {filteredItems.length === 0 && (
+        <div className="text-muted-foreground flex flex-col items-center justify-center py-12">
+          <Folder className="mb-4 h-16 w-16" />
+          <p className="text-lg font-medium">No items found</p>
+          <p className="text-sm">
+            Try adjusting your search or upload some files
+          </p>
+        </div>
+      )}
 
-        {/* Upload */}
-        <UploadButton
-          endpoint="driveUploader"
-          onClientUploadComplete={handleUploadComplete}
-          input={{ folderId: currentFolderId }}
-        />
-      </main>
+      {/* Upload */}
+      <UploadButton
+        endpoint="driveUploader"
+        onClientUploadComplete={handleUploadComplete}
+        input={{ folderId: currentFolderId }}
+      />
     </div>
   );
 }

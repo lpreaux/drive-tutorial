@@ -11,9 +11,7 @@ export default function RootLayout({
       <SidebarProvider>
         <DashboardSidebar></DashboardSidebar>
         <SidebarInset>
-          <DashboardTopbar>
-            <main>{children}</main>
-          </DashboardTopbar>
+          <DashboardTopbar>{children}</DashboardTopbar>
         </SidebarInset>
       </SidebarProvider>
     </>
